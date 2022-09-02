@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     volumes:
       - ./pages:/app/pages
+      - ./components:/app/components
       - ./public:/app/public
       - ./styles:/app/styles
       - ./package.json:/app/package.json
