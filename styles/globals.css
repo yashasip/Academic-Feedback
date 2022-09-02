@@ -8,13 +8,19 @@
 
  /* global variable set */
 :root{
-  --clr-accent-400: ;
-  --clr-accent-100: ;
+  --clr-background: #EEEEEE;
 
-  --clr-primary-400: ;
+  --clr-primary-accent: #FFFFFF;
+  --clr-secondary-accent: #FAFAFA;
+
+  --clr-primary-font: #303030;
+  --clr-secondary-font: #878686;
+
+  --clr-button-font: #FFFFFF;
+  --clr-button-accent: #3A3A3A;
   
-  --clr-neutral-100: ;
-  --clr-neutral-900: ;
+  --clr-tendi: #C8C8C8;
+  --clr-shadow: #838383;
 
   --ff-primary: manrope;
   --ff-secondary: 'Inter';
@@ -68,7 +74,7 @@ html, body{
 
 /* Set core body defaults */
 body {
-  background: #eeeeee;
+  background: var(--clr-background);
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
