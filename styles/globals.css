@@ -68,6 +68,7 @@ html, body{
 
 /* Set core body defaults */
 body {
+  background: #eeeeee;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
