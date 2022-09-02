@@ -1,0 +1,13 @@
+.title {
+    color: #303030;
+    font-size: var(--fs-title);
+    white-space: nowrap;
+    
+    width: fit-content;
+    
+    background-color: #FFFFFF;
+    box-shadow: 0.05rem 0.15rem 1rem 0.2rem gray;
+    border-radius: 0em 0em 0.5rem 0.5rem;
+    padding: 0 2em 0 2em;
+    margin-inline: auto;
+}
