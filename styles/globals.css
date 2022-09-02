@@ -1,20 +1,112 @@
-html,
-body {
-  padding: 0;
+/* Manrope font */
+@font-face {
+    font-family: manrope;
+    src: url('./font/manrope/Manrope[wght].woff2') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+ /* global variable set */
+:root{
+  --clr-accent-400: ;
+  --clr-accent-100: ;
+
+  --clr-primary-400: ;
+  
+  --clr-neutral-100: ;
+  --clr-neutral-900: ;
+
+  --ff-primary: manrope;
+  --ff-secondary: 'Inter';
+  
+  --ff-title: var(--ff-primary);
+  --ff-heading: var(--ff-secondary);
+  --ff-text: var(--ff-primary);
+  --ff-label: var(--ff-primary);
+  --ff-button: var(--ff-secondary);
+
+  --fw-regular: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 800;
+
+  --fs-title: 4rem;
+  --fs-heading: 1.6rem;
+  --fs-text: 1rem;
+  --fs-label: 0.7rem;
+  --fs-button: 1.1rem;
+}
+
+/* Box sizing rules */
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+ /* Remove default margin, padding and initialize font style */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  padding: 0;
+  font: inherit;
+  font-family: var(--ff-primary), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth; 
+}
+
+html, body{
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* styling for links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+/* Make images easier to work with  */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
 }
 
+/* Remove all animations, transitions and smooth */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* default color scheme */
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
