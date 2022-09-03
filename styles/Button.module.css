@@ -1,0 +1,11 @@
+.button {
+    font-family: var(--ff-button);
+    font-size: var(--fs-button);
+    color: var(--clr-button-font);
+
+    background-color: var(--clr-button-accent);
+
+    padding: 0.3em 1.5em 0.3em 1.5em;
+    border-radius: 0.3rem;
+    border: none;
+}
