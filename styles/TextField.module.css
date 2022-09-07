@@ -1,0 +1,29 @@
+.textFieldSpace {
+    position: relative;
+    display: inline-block;
+    margin-inline: 0.2em;
+}
+
+.textField {
+  height: 2.5em;
+
+  padding-left: 0.5em;
+  margin-top: 1.25em;
+  border-radius: 0.3rem;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: #d9d9d9;
+  background-color: var(--clr-secondary-accent);
+}
+
+.textFieldLabel {
+  font-size: var(--fs-label);
+  position: absolute;
+  width: fit-content;
+  left: 0.6em;
+  top: 1em;
+  z-index: 1;
+  padding: 0 0.2em 0 0.2em;
+  color: var(--clr-secondary-font);
+  background-color: var(--clr-secondary-accent);
+}
