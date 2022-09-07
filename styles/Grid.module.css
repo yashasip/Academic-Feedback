@@ -1,0 +1,23 @@
+.studentFormGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 1em 4em;
+  margin-inline: 2em;
+}
+
+.gridColSpanTwo{
+  grid-column-start: 1;
+  justify-self: center;
+}
+
+@media (min-width: 40em) {
+  .studentFormGrid {
+    grid-template-columns: 1fr 1fr; /* use minmax  */ 
+  }
+
+  .gridColSpanTwo{
+    grid-column-start: span 2;
+  }
+}
+
