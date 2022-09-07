@@ -1,8 +1,8 @@
-import styles from '../styles/Button.module.css'
+import styles from '../styles/Button.module.css';
 
 const Button = (props) => {
   return (
-    <>
+    <div className={props.layout}>
       <button
         type={props.type ? props.type : "button"}
         className={styles.button}
@@ -10,7 +10,7 @@ const Button = (props) => {
         {" "}
         {props.text}{" "}
       </button>
-    </>
+    </div>
   );
 };
 

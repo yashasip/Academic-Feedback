@@ -1,4 +1,6 @@
 .button {
+    max-width: fit-content;
+
     font-family: var(--ff-button);
     font-size: var(--fs-button);
     color: var(--clr-button-font);
@@ -8,4 +10,5 @@
     padding: 0.3em 1.5em 0.3em 1.5em;
     border-radius: 0.3rem;
     border: none;
+    margin: auto auto 1em auto;
 }
