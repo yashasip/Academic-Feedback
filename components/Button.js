@@ -6,6 +6,10 @@ const Button = (props) => {
       <button
         type={props.type ? props.type : "button"}
         className={styles.button}
+        onClick={(e) => {
+          e.preventDefault();
+          props.onClick();
+        }}
       >
         {" "}
         {props.text}{" "}
