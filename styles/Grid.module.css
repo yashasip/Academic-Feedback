@@ -1,3 +1,11 @@
+.formGrid {
+  position: relative;
+  top: 2rem;
+
+  display: grid;
+  row-gap: 2em;
+}
+
 .studentFormGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -9,6 +17,11 @@
 .gridColSpanTwo{
   grid-column-start: 1;
   justify-self: center;
+}
+
+.flexCenter{
+  display: flex;
+  align-content: center;
 }
 
 @media (min-width: 40em) {
