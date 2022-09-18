@@ -1,0 +1,52 @@
+.detailsBoard {
+  max-width: 40rem;
+
+  background-color: var(--clr-primary-accent);
+  box-shadow: 0.05rem 0.15rem 1rem 0.2rem var(--clr-shadow);
+  border-radius: 0.5em 0.5em 0.5rem 0.5rem;
+  padding: 0 1.3em 0 1.3em;
+  margin: auto;
+}
+
+.gradeBoard{
+  max-width: 40em;
+  
+  background-color: var(--clr-primary-accent);
+  box-shadow: 0.05rem 0.15rem 1rem 0.2rem var(--clr-shadow);
+  border-radius: 0.5em 0.5em 0.5rem 0.5rem;
+  padding: 0 1.3em 0 1.3em;
+  margin: auto;
+}
+
+.questionSpace {
+  padding: 1rem;
+}
+
+.heading {
+  font-size: var(--fs-heading);
+  font-family: var(--ff-secondary);
+  font-weight: var(--fw-semi-bold);
+  color: var(--clr-primary-font);
+
+  padding: 0.3em 0.3em;
+}
+
+.labelText {
+  font-size: var(--fs-button);
+}
+
+.tendi {
+  border: none; /* remove all border */
+  border-top: 1px solid var(--clr-tendi); /* change only top border */
+  margin: 0 0 1rem 0;
+}
+
+.fullTendi {
+  border: none; /* remove all border */
+  border-top: 1px solid var(--clr-tendi); /* change only top border */
+  margin: 1rem -1.3em 1rem -1.3em;
+}
+
+@media (min-width: 40em) {
+
+}
