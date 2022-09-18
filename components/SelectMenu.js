@@ -5,7 +5,7 @@ const SelectMenu = (props) => {
   return (
       <div className={styles.label}>
       <label htmlFor={props.id} className={labelStyle.labelText}>{props.labelText}</label>
-      <select id={props.id} name={props.id} className={styles.selectMenu}>
+      <select id={props.id} name={props.id} className={styles.selectMenu} onChange={(e) => props.onChange(e)}>
         {props.choices.map((choice) => (
           <option value={choice}>{choice}</option>
         ))}
