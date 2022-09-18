@@ -4,7 +4,7 @@
   background-color: var(--clr-primary-accent);
   box-shadow: 0.05rem 0.15rem 1rem 0.2rem var(--clr-shadow);
   border-radius: 0.5em 0.5em 0.5rem 0.5rem;
-  padding: 0 1.3em 0 1.3em;
+  padding: 0 1.3em 1.5em 1.3em;
   margin: auto;
 }
 
@@ -14,8 +14,9 @@
   background-color: var(--clr-primary-accent);
   box-shadow: 0.05rem 0.15rem 1rem 0.2rem var(--clr-shadow);
   border-radius: 0.5em 0.5em 0.5rem 0.5rem;
-  padding: 0 1.3em 0 1.3em;
+  padding: 0 1.3em 1em 1.3em;
   margin: auto;
+  margin-bottom: 2em;
 }
 
 .questionSpace {
