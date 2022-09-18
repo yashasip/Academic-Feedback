@@ -1,3 +1,7 @@
+.header {
+    position: relative;
+}
+
 .title {
     color: var(--clr-primary-font);
     font-size: var(--fs-title);
