@@ -1,0 +1,13 @@
+.selectMenu {
+    min-width: 8rem;
+    width: fit-content;
+    
+    font-size: var(--fs-button);
+    padding-inline: 0.3em;
+    margin: 0.5em;
+
+    background-color: var(--clr-primary-accent);
+    box-shadow: 0.05rem 0.05rem 0.1rem var(--clr-shadow);
+    border-color: #c7c6c6;
+    border-radius: 0.3rem;
+}
