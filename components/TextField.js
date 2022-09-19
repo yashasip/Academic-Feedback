@@ -14,6 +14,7 @@ const TextField = (props) => {
         readOnly={props.readOnly}
         required={props.required}
         className={styles.textField}
+        onChange={(e) => props.onChange(e)}
       />
     </div>
   );
