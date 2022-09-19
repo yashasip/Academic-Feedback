@@ -1,3 +1,5 @@
+const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+
 const ratings = ["Below Average", "Average", "Good", "Very Good", "Excellent"];
 const defaultRating = 2;
 
@@ -21,9 +23,10 @@ const questions = [
   "Helps students in realizing their strengths and developmental needs",
   "Control mechanism in effectively conducting the class",
   "Skills of addressing inappropriate behavior of student",
-  "Tendency of inviting opinion and question on subject matter from students"
-
+  "Tendency of inviting opinion and question on subject matter from students",
 ];
 
-export { ratings, defaultRating, questions };
-
+export { semesters };
+export { ratings };
+export { defaultRating };
+export { questions };
