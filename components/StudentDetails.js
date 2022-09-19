@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../components/Button.js";
 import TextField from "../components/TextField";
 
@@ -5,6 +6,15 @@ import styles from "../styles/Board.module.css";
 import layout from "../styles/Grid.module.css";
 
 export default function StudentDetails(props) {
+  const [studentDetails, setStudentDetails] = useState({
+    student_id: "",
+    semester: ""
+  });
+
+  const onChange = (e) => {
+    setStudentDetails({ ...studentDetails, [e.target.id]: e.target.value });
+  }
+
   const submitDetails = () => {
     props.fetchDataHandle({
       OS: "Teacher1",
@@ -22,9 +32,10 @@ export default function StudentDetails(props) {
         <hr className={styles.tendi} />
         <form className={layout.studentFormGrid}>
           <TextField
-            id="studentId"
+            id="student_id"
             labelText="ID"
             readOnly={props.studentVerified}
+            onChange={onChange}
           />
           <TextField
             id="semester"
