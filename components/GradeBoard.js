@@ -31,8 +31,8 @@ export default function GradeBoard(props) {
         <p className={styles.labelText}>Teacher: {teacher} </p>
         <hr className={styles.fullTendi} />
         <ol className={styles.questionSpace}>
-          {questions.map((question) => (
-            <li>
+          {questions.map((question, i) => (
+            <li key={i}>
               <LikertScale question={question} />
               <hr className={styles.fullTendi} />
             </li>
