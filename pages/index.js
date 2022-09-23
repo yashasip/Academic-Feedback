@@ -9,12 +9,13 @@ import styles from '../styles/Home.module.css';
 import layout from '../styles/Grid.module.css';
 
 export default function Home() {
+  const [studentId, setStudentId] = useState("");
   const [studentVerified, setVerified] = useState(false);
 
   const [batchData, setBatchData] = useState({});
-  function getData(fetchedData) {
+  function getData(fetchedData, studentId) {
+    setStudentId(studentId)
     setBatchData(fetchedData)
-    console.log(batchData);
     setVerified(true); // display GradeBoard
   }
 
@@ -29,7 +30,7 @@ export default function Home() {
         <div className={layout.formGrid}>
           <StudentDetails studentVerified={studentVerified} fetchDataHandle={ getData } /> 
           {studentVerified ? // display GradeBoard only after submission accepted
-            <GradeBoard batchData={ batchData } /> : null
+            <GradeBoard batchData={ batchData } studentId={studentId} /> : null
           }
         </div>
       </main>
