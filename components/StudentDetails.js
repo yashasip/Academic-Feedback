@@ -18,15 +18,26 @@ export default function StudentDetails(props) {
     setStudentDetails({ ...studentDetails, [e.target.name]: e.target.value });
   };
 
-  const submitDetails = () => {
-    console.log(studentDetails);
-    props.fetchDataHandle({
-      OS: "Teacher1",
-      DC: "Teacher2",
-      ATC: "Teacher3",
-      MIV: "Teacher4",
-      ADE: "Teacher5",
-    }); // test values
+  const submitDetails = async () => {
+    console.log("Requesting Student Batches..."+studentDetails.student_id);
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/batch/student_batches",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          student_id: studentDetails.student_id,
+          semester: studentDetails.semester,
+        }),
+      }
+    ); 
+    const json = await response.json();
+    props.fetchDataHandle(
+      json["batches"],
+      studentDetails.student_id,
+    ); 
   };
 
   return (
@@ -47,6 +58,7 @@ export default function StudentDetails(props) {
             readOnly={props.studentVerified}
             choices={semesters}
             onChange={onChange}
+            disabled={props.studentVerified}
           />
 
           {props.studentVerified ? null : ( // button disappears after submission
