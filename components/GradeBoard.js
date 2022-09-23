@@ -2,20 +2,82 @@ import SelectMenu from "../components/SelectMenu";
 import LikertScale from "./LikertScale";
 import Button from "./Button";
 
-import { questions } from "../constants/constants.js";
+import { questions, defaultRating } from "../constants/constants.js";
 
 import styles from "../styles/Board.module.css";
 import layout from "../styles/Grid.module.css";
 import { useState } from "react";
+import LastPage from "../pages/LastPage";
+
+const getFirst = (object) => {
+  for (let key in object) return key;
+};
 
 export default function GradeBoard(props) {
-  let subjects = [];
+  let batchList = [];
+  let initialBatchFeedback = {};
+
+  let count = 0;
   for (let key in props.batchData) {
-    // creates list of subjects
-    subjects.push(key);
+    // creates list of subjects and teachers
+    batchList[count++] = key;
+    let batchFeed = {};
+    for (let i = 0; i < questions.length; i++)
+      batchFeed["Q" + (i + 1)] = defaultRating + 1;
+
+    initialBatchFeedback[key] = batchFeed;
   }
 
-  const [teacher, setTeacher] = useState(props.batchData[subjects[0]]); // assumes batchdata is not empty.
+  const [batches, setBatches] = useState(props.batchData);
+  const [currentBatch, setCurrentBatch] = useState(getFirst(batches));
+
+  const [batchFeedback, setBatchFeedback] = useState(initialBatchFeedback);
+
+  const setRating = (question, rating) => {
+    setBatchFeedback({
+      ...batchFeedback,
+      [currentBatch]: {
+        ...batchFeedback[currentBatch],
+        [question]: parseInt(rating),
+      },
+    });
+    console.log(batchFeedback);
+  };
+  const getSubjects = () => {
+    let subjects = [];
+    for (let key in batches) {
+      subjects.push(batches[key]["subject"]);
+    }
+    return subjects;
+  };
+
+  const submitBatchDetails = () => {
+    console.log("submitted");
+  };
+
+  const submitFeedbacks = async () => {
+    console.log("Submitting feedback...")
+    console.log(props.studentId);
+    const response = await fetch(
+      "http://127.0.0.1:8000/api/feedback/submit_feedback",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ["feedbacks"] : batchFeedback,
+          ["student_id"]: props.studentId,
+        }),
+      }
+    );
+
+    const json = await response.json();
+    if (json["status"] == "success") {
+      location.href += 'LastPage';
+    }
+    console.log(json);
+  }
 
   return (
     <>
@@ -25,20 +87,32 @@ export default function GradeBoard(props) {
         <SelectMenu
           id="subject"
           labelText="Subject:"
-          choices={subjects}
-          onChange={(e) => setTeacher(props.batchData[e.target.value])}
+          choices={getSubjects()}
+          onChange={(e) => setCurrentBatch(batchList[e.target.selectedIndex])}
         />
-        <p className={styles.labelText}>Teacher: {teacher} </p>
+        <p className={styles.labelText}>
+          Teacher: {batches[currentBatch]["teacher"]}{" "}
+        </p>
         <hr className={styles.fullTendi} />
         <ol className={styles.questionSpace}>
           {questions.map((question, i) => (
             <li key={i}>
-              <LikertScale question={question} />
+              <LikertScale
+                id={"Q" + (i + 1)}
+                question={question}
+                ratingCallback={setRating}
+                ratingValue={batchFeedback[currentBatch]["Q" + (i + 1)]}
+              />
               <hr className={styles.fullTendi} />
             </li>
           ))}
         </ol>
-        <Button type="submit" text="Submit" layout={layout.flexCenter} />
+        <Button
+          type="submit"
+          text="Submit All Feedbacks"
+          layout={layout.flexCenter}
+          onClick={submitFeedbacks}
+        />
       </section>
     </>
   );
