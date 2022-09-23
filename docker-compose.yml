@@ -12,6 +12,7 @@ services:
       - ./public:/app/public
       - ./styles:/app/styles
       - ./constants:/app/constants
+      - ./data:/app/data
       - ./package.json:/app/package.json
       - ./yarn.lock:/app/yarn.lock
       
