@@ -1,25 +1,38 @@
-import "./LastPage.css";
-import React from 'react';
+import React, { useEffect, useRef } from "react";
+import { createRef } from "react";
+
+import lottie from "lottie-web";
+import * as checkAnimData from "../data/checkAnim.json";
+
+import styles from "../styles/LastPage.module.css";
+import Header from "../components/Header";
 
 const LastPage = (props) => {
-  if(props.isSubmitted){
-    return (
-     <div className="response">   
-        <h3>Your feedback has been recorded.<br/> Thank you!</h3>
-        <img src="https://www.freeiconspng.com/thumbs/checkmark-png/checkmark-png-5.png" alt="tickImg" />
-    </div>);
-  }
+  const checkContainer = useRef();
+  useEffect(() => {
+    const checkAnim = lottie.loadAnimation({
+      container: checkContainer.current,
+      animationData: checkAnimData,
+      renderer: "svg",
+      loop: false,
+      autoplay: true,
+    });
+    return () => checkAnim.destroy();
+  }, []);
 
-  else{
-    return(
-      <div className="response">  
-        <h3>Your feedback has not been recorded.</h3>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_8-UOiQ57iPiTLOD2FaRHHAgF-TEOkWas-Q&usqp=CAU" alt="crossImg" /> 
-      </div>   
-    );
-  };
-}
+  return (
+    <>
+      <Header />
+      <div className={styles.response}>
+        <h3>
+          Your feedback has been recorded.
+          <div>Thank you!</div>
+          <div ref={checkContainer} className={styles.checkAnim} />
+        </h3>
+        {}
+      </div>
+    </>
+  );
+};
 
 export default LastPage;
-
-
