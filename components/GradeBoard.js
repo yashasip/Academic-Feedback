@@ -50,39 +50,44 @@ export default function GradeBoard(props) {
     return subjects;
   };
 
-  const submitBatchDetails = () => {
-    console.log("submitted");
-  };
-
   const submitFeedbacks = async () => {
     if (!window.navigator.onLine) {
       props.popupCallback(false, "No Internet Connection");
       return;
     }
-    console.log("Submitting feedback...")
-    console.log(props.studentId);
-    const response = await fetch(
-      "http://127.0.0.1:8000/api/feedback/submit_feedback",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ["feedbacks"] : batchFeedback,
-          ["student_id"]: props.studentId,
-        }),
-      }
-    );
-
-    const json = await response.json();
-    if (json["status"] == "success") {
-      location.href += 'LastPage';
-    } else {
-      props.popupCallback(false, json["message"]);
-    }
-    console.log(json);
-  }
+    console.log("Submitting feedback...");
+    fetch("http://127.0.0.1:8000/api/feedback/submit_feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ["feedbacks"]: batchFeedback,
+        ["student_id"]: props.studentId,
+      }),
+    })
+      .then(response => response.json())
+      .then((json) => {
+        if (json["status"] == "success") {
+          location.href += "LastPage";
+        } else {
+          props.popupCallback(false, json["message"]);
+        }
+      })
+      .catch((error) => {
+        switch (error.name) {
+          case "TypeError":
+            props.popupCallback(
+              false,
+              "Server is Disconnected! Contact Server Admin"
+            );
+            break;
+          default:
+            console.log(error);
+            break;
+        }
+      });
+  };
 
   return (
     <>

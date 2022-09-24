@@ -15,11 +15,13 @@ export default function StudentDetails(props) {
   });
 
   const onChange = (e) => {
-    setStudentDetails({ ...studentDetails, [e.target.name]: e.target.value.trim() });
+    setStudentDetails({
+      ...studentDetails,
+      [e.target.name]: e.target.value.trim(),
+    });
   };
 
   const submitDetails = async () => {
-    
     if (studentDetails["student_id"].length === 0) {
       props.popupCallback(false, "Please enter Student ID");
       return;
@@ -29,25 +31,37 @@ export default function StudentDetails(props) {
     }
 
     console.log("Requesting Student Batches...");
-    const response = await fetch(
-      "http://127.0.0.1:8000/api/batch/student_batches",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          student_id: studentDetails.student_id,
-          semester: studentDetails.semester,
-        }),
-      }
-    ); 
-    const json = await response.json();
-    if (json["status"] == "success") {
-      props.fetchDataHandle(json["batches"], studentDetails.student_id); 
-    } else {
-      props.popupCallback(false, json["message"]);
-    }
+    fetch("http://127.0.0.1:8000/api/batch/student_batches", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        student_id: studentDetails.student_id,
+        semester: studentDetails.semester,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json["status"] == "success") {
+          props.fetchDataHandle(json["batches"], studentDetails.student_id);
+        } else {
+          props.popupCallback(false, json["message"]);
+        }
+      })
+      .catch((error) => {
+        switch (error.name) {
+          case "TypeError":
+            props.popupCallback(
+              false,
+              "Server is Disconnected! Contact Server Admin"
+            );
+            break;
+          default:
+            console.log(error);
+            break;
+        }
+      });
   };
 
   return (
