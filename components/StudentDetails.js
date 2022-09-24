@@ -15,11 +15,20 @@ export default function StudentDetails(props) {
   });
 
   const onChange = (e) => {
-    setStudentDetails({ ...studentDetails, [e.target.name]: e.target.value });
+    setStudentDetails({ ...studentDetails, [e.target.name]: e.target.value.trim() });
   };
 
   const submitDetails = async () => {
-    console.log("Requesting Student Batches..."+studentDetails.student_id);
+    
+    if (studentDetails["student_id"].length === 0) {
+      props.popupCallback(false, "Please enter Student ID");
+      return;
+    } else if (!window.navigator.onLine) {
+      props.popupCallback(false, "No Internet Connection");
+      return;
+    }
+
+    console.log("Requesting Student Batches...");
     const response = await fetch(
       "http://127.0.0.1:8000/api/batch/student_batches",
       {
@@ -34,10 +43,11 @@ export default function StudentDetails(props) {
       }
     ); 
     const json = await response.json();
-    props.fetchDataHandle(
-      json["batches"],
-      studentDetails.student_id,
-    ); 
+    if (json["status"] == "success") {
+      props.fetchDataHandle(json["batches"], studentDetails.student_id); 
+    } else {
+      props.popupCallback(false, json["message"]);
+    }
   };
 
   return (

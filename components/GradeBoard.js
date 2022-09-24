@@ -7,7 +7,6 @@ import { questions, defaultRating } from "../constants/constants.js";
 import styles from "../styles/Board.module.css";
 import layout from "../styles/Grid.module.css";
 import { useState } from "react";
-import LastPage from "../pages/LastPage";
 
 const getFirst = (object) => {
   for (let key in object) return key;
@@ -56,6 +55,10 @@ export default function GradeBoard(props) {
   };
 
   const submitFeedbacks = async () => {
+    if (!window.navigator.onLine) {
+      props.popupCallback(false, "No Internet Connection");
+      return;
+    }
     console.log("Submitting feedback...")
     console.log(props.studentId);
     const response = await fetch(
@@ -75,6 +78,8 @@ export default function GradeBoard(props) {
     const json = await response.json();
     if (json["status"] == "success") {
       location.href += 'LastPage';
+    } else {
+      props.popupCallback(false, json["message"]);
     }
     console.log(json);
   }
