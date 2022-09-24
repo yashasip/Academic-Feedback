@@ -14,8 +14,8 @@ const SelectMenu = (props) => {
         onChange={(e) => props.onChange(e)}
         disabled={props.disabled}
       >
-        {props.choices.map((choice) => (
-          <option value={choice}>{choice}</option>
+        {props.choices.map((choice, i) => (
+          <option key={i+1} value={choice}>{choice}</option>
         ))}
       </select>
     </div>
