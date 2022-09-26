@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import GradeBoard from '../components/GradeBoard';
 import Header from '../components/Header';
+import { Footer } from '../components/Footer';
 import StudentDetails from '../components/StudentDetails';
 
 import styles from '../styles/Home.module.css';
@@ -58,6 +59,7 @@ export default function Home() {
             />
           ) : null}
         </div>
+        <Footer/>
       </main>
     </div>
   );
