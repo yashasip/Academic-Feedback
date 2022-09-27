@@ -76,14 +76,14 @@ export default function StudentDetails(props) {
             readOnly={props.studentVerified}
             onChange={onChange}
           />
-          <SelectMenu
+          {/* <SelectMenu
             id="semester"
             labelText="Semester"
             readOnly={props.studentVerified}
             choices={semesters}
             onChange={onChange}
             disabled={props.studentVerified}
-          />
+          /> */}
 
           {props.studentVerified ? null : ( // button disappears after submission
             <Button

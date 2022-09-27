@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  gap: 1em 4em;
+  gap: 1em;
   margin-inline: 2em;
 }
 
@@ -30,7 +30,7 @@
 
 @media (min-width: 40em) {
   .studentFormGrid {
-    grid-template-columns: 1fr 1fr; /* use minmax  */ 
+    grid-template-columns: 1fr; /* use minmax  */ 
   }
 
   .gridColSpanTwo{
