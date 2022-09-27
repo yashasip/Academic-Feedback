@@ -1,3 +1,7 @@
+.grid {
+  display: grid;
+}
+
 .formGrid {
   position: relative;
   top: 2rem;

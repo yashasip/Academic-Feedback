@@ -36,7 +36,7 @@ export default function Home() {
         <title>Academic Feedback</title>
       </Head>
 
-      <main className={styles.main}>
+      <main className={layout.grid}>
         {popup.popped && (
           <PopupNotifier
             message={popup.message}
@@ -59,7 +59,7 @@ export default function Home() {
             />
           ) : null}
         </div>
-        <Footer/>
+        <Footer isRelative={ studentVerified } />
       </main>
     </div>
   );
