@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 import StudentDetails from '../components/StudentDetails';
 
-import styles from '../styles/Home.module.css';
+// import styles from '../styles/Home.module.css';
 import layout from '../styles/Grid.module.css';
 import PopupNotifier from '../components/PopupNotifier';
 
@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   const popDown = () => {
-    setTimeout(() => setPopup({...popup, popped: false}), 3000);
+    setPopup({ popped: false, message: "", isSuccess: false });
   }
 
   const popUp = (isSuccess, message) => {
@@ -36,12 +36,12 @@ export default function Home() {
         <title>Academic Feedback</title>
       </Head>
 
-      <main className={layout.grid}>
+      <main>
         {popup.popped && (
           <PopupNotifier
             message={popup.message}
             isSuccess={popup.isSuccess}
-            popdownCallback={popDown}
+            popDownCallback={popDown}
           />
         )}
         <Header />
