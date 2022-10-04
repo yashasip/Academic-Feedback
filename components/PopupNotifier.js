@@ -6,10 +6,10 @@ import * as failAnim from "../data/FailAnim.json";
 
 import styles from "../styles/PopupNotifier.module.css";
 
-function PopupNotifier({ message, isSuccess, popdownCallback }) {
+function PopupNotifier({ message, isSuccess, popDownCallback }) {
   const animContainer = useRef();
   useEffect(() => {
-    popdownCallback();
+    setTimeout(() => popDownCallback(), 3000);
     const animReact = lottie.loadAnimation({
       container: animContainer.current,
       animationData: isSuccess ? successAnim : failAnim,
