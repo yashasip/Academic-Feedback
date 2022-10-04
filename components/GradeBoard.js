@@ -6,20 +6,21 @@ import { questions, defaultRating } from "../constants/constants.js";
 
 import styles from "../styles/Board.module.css";
 import layout from "../styles/Grid.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const getFirst = (object) => {
   for (let key in object) return key;
 };
 
 export default function GradeBoard(props) {
-  let batchList = [];
+  let batchIds = [];
+  let batches = props.batchData;
   let initialBatchFeedback = {};
 
   let count = 0;
   for (let key in props.batchData) {
     // creates list of subjects and teachers
-    batchList[count++] = key;
+    batchIds[count++] = key;
     let batchFeed = {};
     for (let i = 0; i < questions.length; i++)
       batchFeed["Q" + (i + 1)] = defaultRating + 1;
@@ -27,9 +28,8 @@ export default function GradeBoard(props) {
     initialBatchFeedback[key] = batchFeed;
   }
 
-  const [batches, setBatches] = useState(props.batchData);
+  const selectMenuRef = useRef();
   const [currentBatch, setCurrentBatch] = useState(getFirst(batches));
-
   const [batchFeedback, setBatchFeedback] = useState(initialBatchFeedback);
 
   const setRating = (question, rating) => {
@@ -42,6 +42,7 @@ export default function GradeBoard(props) {
     });
     console.log(batchFeedback);
   };
+
   const getSubjects = () => {
     let subjects = [];
     for (let key in batches) {
@@ -50,26 +51,45 @@ export default function GradeBoard(props) {
     return subjects;
   };
 
+  const getBatchId = (subject) => {
+    for (let key in batches) {
+      if (batches[key]["subject"] === subject) return key;
+    }
+  };
+
+  console.log(batches);
+
   const submitFeedbacks = async () => {
     if (!window.navigator.onLine) {
       props.popupCallback(false, "No Internet Connection");
       return;
     }
     console.log("Submitting feedback...");
+
     fetch("http://127.0.0.1:8000/api/feedback/submit_feedback", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ["feedbacks"]: batchFeedback,
+        ["feedback_data"]: batchFeedback[currentBatch],
+        ["batch_id"]: currentBatch.toString(),
         ["student_id"]: props.studentId,
       }),
     })
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((json) => {
-        if (json["status"] == "success") {
-          location.href += "LastPage";
+        if (json["status"] === "success") {
+          selectMenuRef.current.removeOption();
+          if (selectMenuRef.current.isEmpty()) {
+            location.href += "LastPage";
+          } else {
+            setCurrentBatch(
+              getBatchId(selectMenuRef.current.getCurrentValue())
+            );
+            window.scrollTo(0, 0);
+            props.popupCallback(true, json["message"]);
+          }
         } else {
           props.popupCallback(false, json["message"]);
         }
@@ -98,7 +118,10 @@ export default function GradeBoard(props) {
           id="subject"
           labelText="Subject:"
           choices={getSubjects()}
-          onChange={(e) => setCurrentBatch(batchList[e.target.selectedIndex])}
+          onChange={(e) => {
+            setCurrentBatch(getBatchId(e.target.value));
+          }}
+          ref={selectMenuRef}
         />
         <p className={styles.labelText}>
           Teacher: {batches[currentBatch]["teacher"]}{" "}
@@ -119,7 +142,7 @@ export default function GradeBoard(props) {
         </ol>
         <Button
           type="submit"
-          text="Submit All Feedbacks"
+          text="Submit"
           layout={layout.flexCenter}
           onClick={submitFeedbacks}
         />
