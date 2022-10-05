@@ -1,7 +1,7 @@
 const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
 
-const ratings = ["Below Average", "Average", "Good", "Very Good", "Excellent"];
-const defaultRating = 2;
+const ratings = ["Not Graded","Below Average", "Average", "Good", "Very Good", "Excellent"];
+const defaultRating = 0;
 
 const questions = [
   "Completes syllabus of the course in time",

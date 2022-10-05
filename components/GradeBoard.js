@@ -23,7 +23,7 @@ export default function GradeBoard(props) {
     batchIds[count++] = key;
     let batchFeed = {};
     for (let i = 0; i < questions.length; i++)
-      batchFeed["Q" + (i + 1)] = defaultRating + 1;
+      batchFeed["Q" + (i + 1)] = defaultRating;
 
     initialBatchFeedback[key] = batchFeed;
   }
@@ -57,7 +57,6 @@ export default function GradeBoard(props) {
     }
   };
 
-  console.log(batches);
 
   const submitFeedbacks = async () => {
     if (!window.navigator.onLine) {
@@ -103,6 +102,10 @@ export default function GradeBoard(props) {
             );
             break;
           default:
+            props.popupCallback(
+              false,
+              error.toString()
+            );
             console.log(error);
             break;
         }
